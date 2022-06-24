@@ -4,42 +4,42 @@ public class StopWatchSample : MonoBehaviour
 {
     public int iterationCount = 1000;
 
-    void Awake()
+    private void Awake()
     {
-        Debug.Log(StopWatch.MeasureAction(delegate ()
+        Debug.Log(Stopwatch.MeasureAction(delegate ()
         {
-            Transform transform = base.transform;
+            var transform = base.transform;
         },
-        this.iterationCount).TotalMilliseconds);
+        iterationCount).TotalMilliseconds);
 
-        Debug.Log(StopWatch.MeasureAction(delegate ()
+        Debug.Log(Stopwatch.MeasureAction(delegate ()
         {
-            GameObject gameObject = base.gameObject;
+            var gameObject = base.gameObject;
         },
-        this.iterationCount).TotalMilliseconds);
+        iterationCount).TotalMilliseconds);
 
         // If you need accuracy.
 
-        StopWatch.Restart();
+        Stopwatch.Restart();
 
-        for (int i = 0; i < this.iterationCount; i++)
+        for (int i = 0; i < iterationCount; i++)
         {
-            Transform transform = base.transform;
+            var transform = base.transform;
         }
 
-        StopWatch.Stop();
+        Stopwatch.Stop();
 
-        Debug.Log(StopWatch.Ellapsed.TotalMilliseconds);
+        Debug.Log(Stopwatch.Elapsed.TotalMilliseconds);
 
-        StopWatch.Restart();
+        Stopwatch.Restart();
 
-        for (int i = 0; i < this.iterationCount; i++)
+        for (int i = 0; i < iterationCount; i++)
         {
-            GameObject gameObject = base.gameObject;
+            var gameObject = base.gameObject;
         }
 
-        StopWatch.Stop();
+        Stopwatch.Stop();
 
-        Debug.Log(StopWatch.Ellapsed.TotalMilliseconds);
+        Debug.Log(Stopwatch.Elapsed.TotalMilliseconds);
     }
 }

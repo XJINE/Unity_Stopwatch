@@ -1,31 +1,17 @@
 ﻿using System;
-using System.Diagnostics;
 
-public static class StopWatch
+public static class Stopwatch
 {
     #region Field
 
-    private static Stopwatch stopWatch = new Stopwatch();
+    private static readonly System.Diagnostics.Stopwatch stopwatch = new ();
 
     #endregion Field
 
     #region Property
 
-    public static TimeSpan Ellapsed
-    {
-        get
-        {
-            return StopWatch.stopWatch.Elapsed;
-        }
-    }
-
-    public static bool IsRunning
-    {
-        get
-        {
-            return StopWatch.stopWatch.IsRunning;
-        }
-    }
+    public static TimeSpan Elapsed   => stopwatch.Elapsed;
+    public static bool     IsRunning => stopwatch.IsRunning;
 
     #endregion Property
 
@@ -33,17 +19,17 @@ public static class StopWatch
 
     public static void Start()
     {
-        StopWatch.stopWatch.Start();
+        stopwatch.Start();
     }
 
     public static void Stop()
     {
-        StopWatch.stopWatch.Stop();
+        stopwatch.Stop();
     }
 
     public static void Reset()
     {
-        StopWatch.stopWatch.Reset();
+        stopwatch.Reset();
     }
 
     public static void Restart()
@@ -60,44 +46,44 @@ public static class StopWatch
         // Because of using 'delegate', the result is more slower than accurate way.
         // However, it is enough for performance comparison.
 
-        TimeSpan result = TimeSpan.Zero;
+        var result = TimeSpan.Zero;
 
-        if (StopWatch.stopWatch.IsRunning)
+        if (stopwatch.IsRunning)
         {
             return result;
         }
 
         if (average)
         {
-            StopWatch.stopWatch.Reset();
+            stopwatch.Reset();
 
-            TimeSpan total = TimeSpan.Zero;
+            var total = TimeSpan.Zero;
 
-            for (int i = 0; i < iteration; i++)
+            for (var i = 0; i < iteration; i++)
             {
-                StopWatch.stopWatch.Start();
+                stopwatch.Start();
                 action();
-                total += StopWatch.stopWatch.Elapsed;
-                StopWatch.stopWatch.Reset();
+                total += stopwatch.Elapsed;
+                stopwatch.Reset();
             }
 
             result = new TimeSpan(total.Ticks / iteration);
         }
         else
         {
-            StopWatch.stopWatch.Reset();
-            StopWatch.stopWatch.Start();
+            stopwatch.Reset();
+            stopwatch.Start();
 
-            for (int i = 0; i < iteration; i++)
+            for (var i = 0; i < iteration; i++)
             {
                 action();
             }
 
-            result = StopWatch.stopWatch.Elapsed;
+            result = stopwatch.Elapsed;
         }
 
-        StopWatch.stopWatch.Stop();
-        StopWatch.stopWatch.Reset();
+        stopwatch.Stop();
+        stopwatch.Reset();
 
         return result;
     }

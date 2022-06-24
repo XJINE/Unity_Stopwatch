@@ -1,16 +1,17 @@
-# Unity_StopWatch
+# Unity_Stopwatch
 
 Utility to measure performance of small action/function or continuous codes.
 
 NOTE:
 This is not depends on Unity. Main codes is able to works on native C#.
 
-## Import to Your Project
+## Importing
 
-You can import this asset from UnityPackage.
+You can use Package Manager or import it directly.
 
-- [StopWatch.unitypackage](https://github.com/XJINE/Unity_StopWatch/blob/master/StopWatch.unitypackage)
-
+```
+https://github.com/XJINE/Unity_Stopwatch.git?path=Assets/Packages/Stopwatch
+```
 
 ## How to Use
 
@@ -18,11 +19,11 @@ You can import this asset from UnityPackage.
 Pass an action and the iteration count, it will returns the time of the action.
 
 ```csharp
-Debug.Log(StopWatch.MeasureAction(delegate ()
+Debug.Log(Stopwatch.MeasureAction(delegate ()
 {
-    Transform transform = base.transform;
+    var transform = base.transform;
 },
-this.loopCount).TotalMilliseconds);
+loopCount).TotalMilliseconds);
 ```
 If you pass ``true`` as third argument, the result will shows average time.
 
@@ -31,15 +32,14 @@ You can use 3 methods to get more strict time. ``Start``, ``Stop`` and ``Restart
 
 ```csharp
 
-StopWatch.Restart();
+Stopwatch.Restart();
 
-for (int i = 0; i < this.loopCount; i++)
+for (int i = 0; i < loopCount; i++)
 {
-    Transform transform = base.transform;
+    var transform = base.transform;
 }
 
-StopWatch.Stop();
+Stopwatch.Stop();
 
-Debug.Log(StopWatch.Ellapsed.TotalMilliseconds);
+Debug.Log(Stopwatch.Ellapsed.TotalMilliseconds);
 ```
-
